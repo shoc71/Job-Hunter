@@ -9,12 +9,12 @@ function App() {
 
   return (
     <div>
+      <NavBar />
       <Routes>
-        <NavBar />
         <Route path="/" element={< HomePage />} />
         <Route path="*" element={< ErrorPage />} />
-        < Footer />
       </Routes>
+      < Footer />
     </div>
   )
 }
