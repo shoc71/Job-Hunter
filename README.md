@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# Job-Hunter
+written by shoc71;
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+A frontend application built using GitHub Secret Token [(not found in this code)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to find and recruit some potential public profiles available on the Github. Additionally, profiles can be selected and removed to the recruiters liking. Application was made using NodeJS, React, Bootstrap, API (Github Secret Token) and everything was deployed on render.
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Questions](#questions)
+- [Links](#links)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Open up terminal (more specifically [bash](https://www.youtube.com/watch?v=3eu67g3PTdk))
+2. Install ```npm``` and ```node``` packages on your desktop
+3. Type the following command: ```git clone git@github.com:shoc71/Job-Hunter.git```
+4. Type the following command: ```npm i ``` 
+5. Type the following command: ```npm run build ``` 
+6. Change into following directory using this command ```cd dist``` or ```cd build```
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+After competing the installion instructions type up in the CLI (terminal), navigate to the code's location using the "cd" command. Finally run... 
 
-- Configure the top-level `parserOptions` property like this:
+```~/path/to/code$ npm run dev```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Contribution
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Fork repo, make changes, and request a merge.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+If you idenitfy any security or performance issues or any major improvements, raise an issue and let the community know.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## License
+This project is licensed under the [![License](https://opensource.org/licenses/Apache-2.0)](https://opensource.org/licenses/Apache-2.0).
+
+## Questions
+For any questions or concerns, please email mrdrlogic@gmail.com
+
+## Links
+Youtube Tutorial: [Click Unlisted Video Here...](#)
+
+Deployed Webpage: https://job-hunter-n1p6.onrender.com/
+
+Github Repo: https://github.com/shoc71/Job-Hunter/
+
+GitHub Profile: [shoc71](https://github.com/shoc71)
