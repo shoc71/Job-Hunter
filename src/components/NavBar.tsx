@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 
-function NavBar({ isDarkMode, toggleTheme }) {
+interface NavBarProps {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}
+
+function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
   return (
     <nav className={`navbar navbar-expand-lg ${isDarkMode ? 'navbar-dark bg-primary' : 'navbar-dark bg-primary'}`}>
       <div className="container-fluid">

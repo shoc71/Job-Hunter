@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 function Footer() {
-  const [hoveredIcon, setHoveredIcon] = useState(null);
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
-  const handleMouseEnter = (icon) => setHoveredIcon(icon);
+  const handleMouseEnter = (icon: string) => setHoveredIcon(icon);
   const handleMouseLeave = () => setHoveredIcon(null);
 
-  const iconStyles = (icon, color) => ({
+  const iconStyles = (icon: string, color: string) => ({
     fontSize: '1.5rem',
     color: hoveredIcon === icon ? color : 'white',
     textShadow: hoveredIcon === icon ? `0px 0px 10px ${color}` : 'none',
@@ -21,8 +21,8 @@ function Footer() {
           {/* Brand & Description */}
           <div className="mb-4 d-flex align-items-center">
             <img
-              src="https://shorturl.at/lepSy" 
-              alt="" 
+              src="https://shorturl.at/lepSy"
+              alt=""
               style={{ width: '25px', height: 'auto' }}
             />
             <h4>Mystery Orbs</h4>
@@ -31,7 +31,11 @@ function Footer() {
           <div className="mb-3">
             <h5>Follow Me</h5>
             <div className="d-flex">
-              <a href="https://facebook.com" target='_blank'>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-facebook"
                   style={iconStyles('facebook', '#1877f2')}
@@ -39,7 +43,11 @@ function Footer() {
                   onMouseLeave={handleMouseLeave}
                 ></i>
               </a>
-              <a href="https://twitter.com" target='_blank'>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-twitter-x"
                   style={iconStyles('twitter', '#1da1f2')}
@@ -47,7 +55,11 @@ function Footer() {
                   onMouseLeave={handleMouseLeave}
                 ></i>
               </a>
-              <a href="https://instagram.com" target='_blank'>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-instagram"
                   style={iconStyles('instagram', '#e1306c')}
@@ -55,7 +67,11 @@ function Footer() {
                   onMouseLeave={handleMouseLeave}
                 ></i>
               </a>
-              <a href="https://linkedin.com" target='_blank'>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-linkedin"
                   style={iconStyles('linkedin', '#0077b5')}
@@ -63,7 +79,11 @@ function Footer() {
                   onMouseLeave={handleMouseLeave}
                 ></i>
               </a>
-              <a href="https://github.com/shoc71" target='_blank'>
+              <a
+                href="https://github.com/shoc71"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-github"
                   style={iconStyles('github', '#b3b3b3')}
@@ -71,7 +91,11 @@ function Footer() {
                   onMouseLeave={handleMouseLeave}
                 ></i>
               </a>
-              <a href="https://stackoverflow.com" target='_blank'>
+              <a
+                href="https://stackoverflow.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i
                   className="bi bi-stack-overflow"
                   style={iconStyles('stackoverflow', '#f48024')}
