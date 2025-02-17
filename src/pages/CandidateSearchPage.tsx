@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { searchGithub, searchGithubUser } from "../api/API.tsx"; 
+import { searchGithub, searchGithubUser } from "../api/API.tsx";
 
-interface CandidateDetails {
+export interface CandidateDetails {
   id: number;
   login: string;
   name?: string | null;
@@ -18,6 +18,17 @@ const CandidateSearchPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Helper to get selected candidates from localStorage
+  const getSelectedCandidates = (): CandidateDetails[] => {
+    const stored = localStorage.getItem("selectedCandidates");
+    return stored ? JSON.parse(stored) : [];
+  };
+
+  // Save selected candidates to localStorage
+  const saveSelectedCandidates = (selected: CandidateDetails[]) => {
+    localStorage.setItem("selectedCandidates", JSON.stringify(selected));
+  };
+
   // Fetch random candidates from GitHub
   const loadRandomCandidates = async () => {
     setLoading(true);
@@ -30,12 +41,15 @@ const CandidateSearchPage = () => {
       const detailedCandidates: CandidateDetails[] = await Promise.all(
         detailedCandidatesPromises
       );
-      setCandidates(
-        detailedCandidates.map((c) => ({
-          ...c,
-          added: false,
-        }))
-      );
+
+      // Mark candidates as added if they are already in localStorage
+      const selectedCandidates = getSelectedCandidates();
+      const updatedCandidates = detailedCandidates.map((c) => ({
+        ...c,
+        added: selectedCandidates.some((s) => s.id === c.id),
+      }));
+
+      setCandidates(updatedCandidates);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -44,18 +58,28 @@ const CandidateSearchPage = () => {
   };
 
   // Toggle candidate selection state
-  const toggleCandidate = (id: number) => {
+  const toggleCandidate = (candidate: CandidateDetails) => {
+    let selectedCandidates = getSelectedCandidates();
+    const isSelected = selectedCandidates.some((c) => c.id === candidate.id);
+
+    if (isSelected) {
+      selectedCandidates = selectedCandidates.filter((c) => c.id !== candidate.id);
+    } else {
+      selectedCandidates.push(candidate);
+    }
+    saveSelectedCandidates(selectedCandidates);
+
+    // Update the local candidates list so the UI reflects the change
     setCandidates((prev) =>
-      prev.map((candidate) =>
-        candidate.id === id
-          ? { ...candidate, added: !candidate.added }
-          : candidate
+      prev.map((c) =>
+        c.id === candidate.id ? { ...c, added: !isSelected } : c
       )
     );
   };
 
   useEffect(() => {
     loadRandomCandidates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -97,10 +121,12 @@ const CandidateSearchPage = () => {
                   {candidate.name ? candidate.name : candidate.login}
                 </h5>
                 <p className="card-text">
-                  <strong>Email:</strong> {candidate.email ? candidate.email : "No email information present"}
+                  <strong>Email:</strong>{" "}
+                  {candidate.email ? candidate.email : "No email information present"}
                 </p>
                 <p className="card-text">
-                  <strong>Bio:</strong> {candidate.bio ? candidate.bio : "No bio information present"}
+                  <strong>Bio:</strong>{" "}
+                  {candidate.bio ? candidate.bio : "No bio information present"}
                 </p>
                 <a
                   href={candidate.html_url}
@@ -111,7 +137,7 @@ const CandidateSearchPage = () => {
                   View Profile
                 </a>
                 <button
-                  onClick={() => toggleCandidate(candidate.id)}
+                  onClick={() => toggleCandidate(candidate)}
                   className={`btn btn-sm ms-2 ${
                     candidate.added ? "btn-danger" : "btn-success"
                   }`}
