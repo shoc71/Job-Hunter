@@ -1,24 +1,30 @@
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const ContactMePage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [responseMessage, setResponseMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [responseMessage, setResponseMessage] = useState<string>('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: value
-    });
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -26,9 +32,9 @@ const ContactMePage = () => {
       const response = await fetch('https://formspree.io/f/mjkgajnj', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {
@@ -36,8 +42,9 @@ const ContactMePage = () => {
       } else {
         setResponseMessage('Failed to send the message.');
       }
-    } catch (error) {
-      setResponseMessage('An Error occurred:', error);
+    } catch (error: any) {
+      // Concatenate the error message into a single string
+      setResponseMessage(`An error occurred: ${error.message || error}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -80,7 +87,7 @@ const ContactMePage = () => {
             className="form-control"
             id="message"
             name="message"
-            rows="5"
+            rows={5}
             value={formData.message}
             onChange={handleChange}
             required
