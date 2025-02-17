@@ -1,6 +1,8 @@
 import CandidateSearchPage from "./CandidateSearchPage";
 
 const HomePage = () => {
+  console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
+
   return (
     <div>
       {/* Hero Section */}
