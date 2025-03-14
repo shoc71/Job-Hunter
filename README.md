@@ -1,7 +1,7 @@
 # Job-Hunter
 written by shoc71;
 
-![image](https://github.com/user-attachments/assets/5532359c-3e8e-4e14-8c48-1528a087dd4f)
+![Job Hunter](https://github.com/user-attachments/assets/d29c4319-e21a-4cfc-9a90-026c31c10c9a)
 
 ## Description
 A frontend application built using GitHub Secret Token [(not found in this code)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) to find and recruit some potential public profiles available on the Github. Additionally, profiles can be selected and removed to the recruiters liking. Application was made using NodeJS, React, Bootstrap, API (Github Secret Token) and everything was deployed on render.
